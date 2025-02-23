@@ -20,15 +20,13 @@ public class Product {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+     private String code;
      private String name;
      private BigDecimal price;
      private Integer stock;
 
 
-     @ManyToOne
-     @JoinColumn(name="id_categoria", nullable = false)
-     @JsonIgnore
-    private Maker maker;
+
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonIgnore

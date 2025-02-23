@@ -19,6 +19,7 @@ import java.util.List;
 public class VentaDTO {
 
     private Long id;
+    private int numero_venta;
     private Date fecha;
     private Double total;
     private int estado;

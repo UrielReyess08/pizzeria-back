@@ -30,6 +30,7 @@ public class VentaController {
 
         VentaDTO ventaDTO = VentaDTO.builder()
                 .id(venta.getId())
+                .numero_venta(venta.getNumero_venta())
                 .fecha(venta.getFecha())
                 .total(venta.getTotal())
                 .estado(venta.getEstado())
@@ -48,6 +49,7 @@ public class VentaController {
         .stream()
         .map(venta -> VentaDTO.builder()
                 .id(venta.getId())
+                .numero_venta(venta.getNumero_venta())
                 .fecha(venta.getFecha())
                 .total(venta.getTotal())
                 .estado(venta.getEstado())
@@ -65,6 +67,7 @@ public class VentaController {
         }*/
 
         Venta venta = Venta.builder()
+                .numero_venta(ventaDTO.getNumero_venta())
                 .fecha(ventaDTO.getFecha())
                 .total(ventaDTO.getTotal())
                 .estado(ventaDTO.getEstado())
@@ -86,6 +89,7 @@ public class VentaController {
         Optional<Venta> ventaOptional = ventaService.findById(id);
         if(ventaOptional.isPresent()){
             Venta venta = ventaOptional.get();
+            venta.setNumero_venta(ventaDTO.getNumero_venta());
             venta.setFecha(ventaDTO.getFecha());
             venta.setTotal(ventaDTO.getTotal());
             venta.setEstado(ventaDTO.getEstado());

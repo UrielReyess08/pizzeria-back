@@ -29,10 +29,11 @@ public class ProductController {
             Product product = productOptional.get();
             ProductDTO productDTO = ProductDTO.builder()
                     .id(product.getId())
+                    .code(product.getCode())
                     .name(product.getName())
                     .price(product.getPrice())
                     .stock(product.getStock())
-                    .maker(product.getMaker())
+
                     .detalleVentaList(product.getDetalleVentaList())
                     .build();
             return ResponseEntity.ok(productDTO);
@@ -45,10 +46,10 @@ public class ProductController {
         .stream()
                 .map(product -> ProductDTO.builder()
                 .id(product.getId())
+                                .code(product.getCode())
                 .name(product.getName())
                         .price(product.getPrice())
                                 .stock(product.getStock())
-                                .maker(product.getMaker())
                                 .detalleVentaList(product.getDetalleVentaList())
                                 .build()
                 ).toList();
@@ -57,14 +58,14 @@ public class ProductController {
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody ProductDTO productDTO) throws URISyntaxException {
-        if(productDTO.getName().isBlank() || productDTO.getPrice() ==null || productDTO.getStock() == null || productDTO.getMaker() == null){
+        if(productDTO.getName().isBlank() || productDTO.getPrice() ==null || productDTO.getStock() == null){
     return ResponseEntity.badRequest().build();
         }
         Product product = Product.builder()
+                .code(productDTO.getCode())
                 .name(productDTO.getName())
                 .price(productDTO.getPrice())
                 .stock(productDTO.getStock())
-                .maker(productDTO.getMaker())
                 .detalleVentaList(productDTO.getDetalleVentaList())
                 .build();
 
@@ -80,9 +81,10 @@ public class ProductController {
         if(productOptional.isPresent()) {
             Product product = productOptional.get();
             product.setName(productDTO.getName());
+            product.setName(productDTO.getName());
             product.setPrice(productDTO.getPrice());
             product.setStock(productDTO.getStock());
-            product.setMaker(productDTO.getMaker());
+
             productService.save(product);
             return ResponseEntity.ok("Registro Actualizado");
         }
